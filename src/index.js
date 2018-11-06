@@ -70,19 +70,29 @@ async function drawTodoList() { // 통신할려고 비동기 함수를 만든 �
       body,
       complete: false
     })
-    if (res.status === 201) {
-      drawTodoList()
-    }
+    // if (res.status === 201) {
+    //   drawTodoList()
+    // }
+    drawTodoList()
   })
 
-  list.forEach(todoItem => {
+  list.forEach((todoItem, index) => {
     // 1. 템플릿 복사하기
     const fragment = document.importNode(templates.todoItem, true);
 
     // 2. 내용 채우고 이벤트 리스너 등록하기
     const bodyEl = fragment.querySelector('.body')
+    const deleteEl = fragment.querySelector('.delete')
 
     bodyEl.textContent = todoItem.body
+
+    deleteEl.addEventListener('click', async e => {
+      // 삭제 요청 보내기
+      await api.delete('/todos/' + todoItem.id);
+      // 성공 시 할 일 목록 다시 그리기
+      drawTodoList()
+    })
+
 
     // 3. 문서 내부에 삽입하기
     todoListEl.appendChild(fragment)
