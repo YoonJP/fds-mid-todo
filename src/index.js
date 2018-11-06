@@ -93,8 +93,21 @@ async function drawTodoList() { // 통신할려고 비동기 함수를 만든 �
     // 2. 내용 채우고 이벤트 리스너 등록하기
     const bodyEl = fragment.querySelector('.body')
     const deleteEl = fragment.querySelector('.delete')
+    const completeEl = fragment.querySelector('.complete')
+
+    if (todoItem.complete) {
+      completeEl.setAttribute('checked', '') // boolean attirbute(ex: checked, disabled): attribute 이름만 있고 값은 없음
+    }
 
     bodyEl.textContent = todoItem.body
+
+    completeEl.addEventListener('click', async e => {
+      e.preventDefault()
+      await api.patch('/todos/' + todoItem.id, {
+        complete: !todoItem.complete
+      })
+      drawTodoList()
+    })
 
     deleteEl.addEventListener('click', async e => {
       // 삭제 요청 보내기
