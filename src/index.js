@@ -70,7 +70,6 @@ async function drawTodoList() { // 통신할려고 비동기 함수를 만든 �
     localStorage.removeItem('token')
     // 2. 로그인 폼 보여주기
     drawLoginForm()
-
   })
 
   todoFormEl.addEventListener('submit', async e => {
@@ -96,7 +95,7 @@ async function drawTodoList() { // 통신할려고 비동기 함수를 만든 �
     const completeEl = fragment.querySelector('.complete')
 
     if (todoItem.complete) {
-      completeEl.setAttribute('checked', '') // boolean attirbute(ex: checked, disabled): attribute 이름만 있고 값은 없음
+      completeEl.setAttribute('checked', '') // boolean attribute(ex: checked, disabled): attribute 이름만 있고 값은 없음
     }
 
     bodyEl.textContent = todoItem.body
