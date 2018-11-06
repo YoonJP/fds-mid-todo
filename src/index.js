@@ -62,6 +62,16 @@ async function drawTodoList() { // 통신할려고 비동기 함수를 만든 �
   // 2. 내용 채우고 이벤트 리스너 등록하기
   const todoListEl = fragment.querySelector('.todo-list')
   const todoFormEl = fragment.querySelector('.todo-form')
+  const logoutEl = fragment.querySelector('.logout')
+
+  logoutEl.addEventListener('click', e => {
+    // 로그아웃 절차
+    // 1. 토큰 삭제
+    localStorage.removeItem('token')
+    // 2. 로그인 폼 보여주기
+    drawLoginForm()
+
+  })
 
   todoFormEl.addEventListener('submit', async e => {
     e.preventDefault()
